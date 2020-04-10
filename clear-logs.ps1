@@ -1,8 +1,10 @@
 ﻿#script deletes the last written file located at C:\datacache
 #script has to be executed on each node on the cluster - this can be performed using GPO or another configuration management tool - like puppet
 # Create Log folder where the log files are stored
-# this tep is optional we can use any other folder
 
+
+
+# checks if C:\logs folder exist to place the log files if it does not exist the script will create such folder
 $LogDirCheck = Test-Path C:\logs
 
 if ($LogDirCheck -eq $false){
@@ -37,8 +39,7 @@ while ($FreeSpacePRCNT -lt 20) {
 	
 	exit;     
         }
-	catch {
-        
+	catch {        
 	"$date unable to delete the file $file Unknown error: $_.ScriptStackTrace " | Out-File -FilePath C:\logs\removedfiles.log -Append #write an error message to the log
         
 	exit;        
