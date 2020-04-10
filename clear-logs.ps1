@@ -35,12 +35,14 @@ while ($FreeSpacePRCNT -lt 20) {
     catch [System.IO.FileNotFoundException],[System.IO.IOException]{
  
         "$date $file.name was not fould check the error $_.ScriptStackTrace " | Out-File -FilePath C:\logs\removedfiles.log -Append
-		exit;     
+	
+	exit;     
         }
     catch {
         
         "$date unable to delete the file $file Unknown error: $_.ScriptStackTrace " | Out-File -FilePath C:\logs\removedfiles.log -Append #write an error message to the log
-        exit;        
+        
+	exit;        
         }                       
 }
 
